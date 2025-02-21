@@ -1,0 +1,88 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Get 3LO",
+            "skipFiles": ["<node_internals>/**"],
+            "program": "${workspaceFolder}/index.js",
+            "args": ["-t", "-c", "config.json"]
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "App Bundle",
+            "skipFiles": ["<node_internals>/**"],
+            "program": "${workspaceFolder}/index.js",
+            "args": ["-b", "-c", "config.json"]
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Activity",
+            "skipFiles": ["<node_internals>/**"],
+            "program": "${workspaceFolder}/index.js",
+            "args": ["-a", "-c", "config.json"]
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "App Bundle / Work Item",
+            "skipFiles": ["<node_internals>/**"],
+            "program": "${workspaceFolder}/index.js",
+            "args": ["-b", "-w", "-c", "config.json"]
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Activity / Work Item",
+            "skipFiles": ["<node_internals>/**"],
+            "program": "${workspaceFolder}/index.js",
+            "args": ["-a", "-w", "-c", "config.json"]
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Work Item",
+            "skipFiles": ["<node_internals>/**"],
+            "program": "${workspaceFolder}/index.js",
+            "args": ["-w", "-c", "config.json"]
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Delete App",
+            "skipFiles": ["<node_internals>/**"],
+            "program": "${workspaceFolder}/index.js",
+            "args": ["-d", "-c", "config.json"]
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Patch App",
+            "skipFiles": ["<node_internals>/**"],
+            "program": "${workspaceFolder}/index.js",
+            "args": ["-p", "-c", "config.json"]
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Create Keys",
+            "skipFiles": ["<node_internals>/**"],
+            "program": "${workspaceFolder}/index.js",
+            "args": ["-k", "-c", "config.json"]
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Sign Activity",
+            "skipFiles": ["<node_internals>/**"],
+            "program": "${workspaceFolder}/index.js",
+            "args": ["-s", "-c", "config.json"]
+        }
+    ]
+}

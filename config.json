@@ -1,0 +1,65 @@
+{
+	"credentials": {
+		"clientId": "<client id>",
+		"clientSecret": "<client secret>",
+		"scope": "code:all data:read data:write bucket:create bucket:read bucket:update bucket:delete"
+	},
+	"nickname": "<client id>",
+	"bucketName": "<bucket name>",
+	"appbundle": {
+		"id": "UpdateIPTParam",
+		"description": "UpdateIPTParam Inventor app bundle",
+		"engine": "Autodesk.Inventor+2025",
+		"alias": "dev",
+		"path": "UpdateIPTParam.bundle"
+	},
+	"activity": {
+		"id": "UpdateIPTParam",
+		"description": "UpdateIPTParam Inventor activity",
+		"engine": "Autodesk.Inventor+2025",
+		"alias": "dev",
+		"commandLine": [
+			"$(engine.path)\\InventorCoreConsole.exe /i \"$(args[inputFile].path)\" /al \"$(appbundles[UpdateIPTParam].path)\""
+		],
+		"parameters": {
+			"inputFile": {
+				"verb": "get",
+				"description": "The input Inventor file",
+				"required": true
+			},
+			"inputJson": {
+				"verb": "get",
+				"description": "The input JSON file",
+				"required": false,
+				"localName": "params.json"
+			},
+			"outputFile": {
+				"verb": "put",
+				"description": "The output Inventor file",
+				"required": false,
+				"localName": "outputFile.ipt"
+			}
+		},
+		"appbundles": [
+			"{{nickname}}.UpdateIPTParam+dev"
+		],
+		"settings": {}
+	},
+	"workitem": {
+		"arguments": {
+			"inputFile": {
+				"url": "urn:adsk.objects:os.object:{{bucketName}}/inventor_sample_file.ipt"
+			},
+			"inputJson": {
+				"url": "data:application/json, {\"width\": 10, \"height\": 20}"
+			},
+			"outputFile": {
+				"verb": "put",
+				"url": "urn:adsk.objects:os.object:{{bucketName}}/output.ipt",
+				"headers": {
+					"Authorization": "Bearer {{accessToken2LO}}"
+				}
+			}
+		}
+	}
+}
