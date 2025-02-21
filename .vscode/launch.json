@@ -15,6 +15,14 @@
         {
             "type": "node",
             "request": "launch",
+            "name": "Engines",
+            "skipFiles": ["<node_internals>/**"],
+            "program": "${workspaceFolder}/index.js",
+            "args": ["-e", "-c", "config.json"]
+        },
+        {
+            "type": "node",
+            "request": "launch",
             "name": "App Bundle",
             "skipFiles": ["<node_internals>/**"],
             "program": "${workspaceFolder}/index.js",

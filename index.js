@@ -125,6 +125,7 @@ program
         "A simple CLI application to help with Design Automation API tasks"
     )
     .option("-t, --token", "Create 3-legged token")
+    .option("-e, --engines", "List available engines")
     .option("-b, --bundle", "Update app bundle")
     .option("-a, --activity", "Update activity")
     .option("-w, --workitem", "Run work item")
@@ -233,6 +234,10 @@ if (options.patch) {
     await patchApp();
 }
 
+if (options.engines) {
+    await listEngines();
+}
+
 if (options.bundle) {
     console.log(`Updating app bundle ${config.appbundle.id}`);
 
@@ -275,6 +280,33 @@ if (options.workitem) {
 
 if (!options.token) {
     process.exit(0);
+}
+
+// Engines
+
+async function listEngines() {
+    let page = null;
+    do {
+        let res = await fetch(
+            `https://developer.api.autodesk.com/da/us-east/v3/engines${page ? `?page=${page}` : ""}`,
+            {
+                method: "GET",
+                headers: {
+                    Authorization: `Bearer ${globals.accessToken2LO}`,
+                },
+            }
+        );
+
+        if (res.status !== 200) {
+            console.error("Error listing engines: " + res.statusText);
+            return;
+        }
+
+        let data = await res.json();
+        console.log(JSON.stringify(data.data, null, 2));
+
+        page = data.paginationToken;
+    } while (page);
 }
 
 // Account

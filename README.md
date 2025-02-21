@@ -12,6 +12,7 @@ DA CLI is a command-line interface tool designed to help with Design Automation 
 ## Features
 
 Each feature is provided by a different command line option:
+- `--engines`: list all available engines.
 - `--token`: create a 3-legged token that will be used if you are running a **work item** that relies on a signed **activity**. You'll just have to open `localhost:8080` in the browser and log in with the user account you want to use. The **access token** will be saved in `token.json` and will be used if needed when running a **work item**.
 - `--bundle`: create a new **app bundle** or a new version for an existing **app bundle**. The `appbundle` part of the `config.json` file needs to be filled in correctly.
 - `--activity`: create a new **activity** or a new version for an existing **activity**. The `activity` part of the `config.json` file needs to be filled in correctly.
