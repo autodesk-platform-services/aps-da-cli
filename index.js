@@ -273,7 +273,7 @@ if (options.workitem) {
         await runWorkItem();
         process.exit(0);
     } catch (error) {
-        console.error("Error running work item");
+        console.error(error.message);
         if (error.quit) process.exit(1);
     }
 }
@@ -729,11 +729,20 @@ async function saveReport(workitemData) {
     console.log("Work item report: " + workitemData.reportUrl);
     try {
         let res = await fetch(workitemData.reportUrl);
-        const text = await res.text();
+        let data = null;
+        let extension = "json";
+        try {
+            data = await res.json();
+            data = JSON.stringify(data, null, 2);
+        } catch {
+            data = await res.text();
+            extension = "txt";
+        }
+
         if (!fs.existsSync("./reports")) fs.mkdirSync("./reports");
 
-        let fileName = `./reports/${workitemData.id}.txt`
-        fs.writeFileSync(fileName, text, {
+        let fileName = `./reports/${workitemData.id}.${extension}`;
+        fs.writeFileSync(fileName, data, {
             encoding: "utf8",
             flag: "w",
         });
