@@ -9,7 +9,7 @@
 
 DA CLI is a command-line interface tool designed to help with Design Automation API tasks.
 
-## Features
+## Features 
 
 Each feature is provided by a different command line option:
 - `--engines`: list all available engines.
