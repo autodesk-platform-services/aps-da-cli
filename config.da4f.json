@@ -1,0 +1,45 @@
+{
+	"credentials": {
+		"clientId": "<client id>",
+		"clientSecret": "<client secret>",
+		"scope": "code:all data:read data:write bucket:create bucket:read bucket:update bucket:delete"
+	},
+	"nickname": "<client id or nickname>",
+	"bucketName": "<bucket name>",
+	"appbundle": {
+		"id": "ConfigureDesignAppBundle",
+		"description": "My first Fusion AppBundle based on Fusion 2025",
+		"engine": "Autodesk.Fusion+Latest",
+		"alias": "my_working_version",
+		"path": "ConfigureDesign"
+	},
+	"activity": {
+		"id": "ConfigureDesignActivity",
+		"description": "",
+		"engine": "Autodesk.Fusion+Latest",
+		"alias": "my_working_version",
+		"commandLine": [],
+		"parameters": {
+			"TaskParameters": {
+				"verb": "read",
+				"description": "the parameters for the script",
+				"required": false
+			},
+			"PersonalAccessToken": {
+				"verb": "read",
+				"description": "the personal access token to use",
+				"required": true
+			}
+		},
+		"appbundles": [
+			"{{nickname}}.ConfigureDesignAppBundle+my_working_version"
+		],
+		"settings": {}
+	},
+	"workitem": {
+		"arguments": {
+			"PersonalAccessToken": "<personal access token>",
+			"TaskParameters": "{\n  \"fileURN\": \"urn:adsk.wipprod:dm.lineage:shuH8zKvThW_4Tdu-m22sw\",\n  \"parameters\": {\n    \"d3\": \"40mm\"\n  }\n}"
+		}
+	}
+}
