@@ -565,7 +565,7 @@ function createUpdateActivity() {
             reject({ message: activity.message, quit: true });
 
         let alias = await fetch(
-            `https://developer.api.autodesk.com/da/us-east/v3/activities/${config.appbundle.id}/aliases`,
+            `https://developer.api.autodesk.com/da/us-east/v3/activities/${config.activity.id}/aliases`,
             {
                 method: "POST",
                 headers: {
@@ -585,7 +585,7 @@ function createUpdateActivity() {
         if (alias.status === 409) {
             // If it already exists create new version instead
             alias = await fetch(
-                `https://developer.api.autodesk.com/da/us-east/v3/activities/${config.appbundle.id}/aliases/${config.appbundle.alias}`,
+                `https://developer.api.autodesk.com/da/us-east/v3/activities/${config.activity.id}/aliases/${config.appbundle.alias}`,
                 {
                     method: "PATCH",
                     headers: {
