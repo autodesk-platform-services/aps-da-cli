@@ -4,7 +4,7 @@ import path, { resolve } from "path";
 import archiver from "archiver";
 import express from "express";
 import FormData from "form-data";
-import { exec } from "node:child_process";
+import Signer from "./signer.js";
 
 // Authentication
 
@@ -155,48 +155,14 @@ if (!globals.accessToken2LO) {
     process.exit(1);
 }
 
-if (options.key || options.sign) {
-    if (process.platform !== "win32") {
-        console.error(
-            "-key and -sign only works on Windows, because it requires Das.WorkItemSigner.exe"
-        );
-        process.exit(1);
-    }
-
-    if (!fs.existsSync("./Das.WorkItemSigner.exe")) {
-        console.error(
-            "You have to download Das.WorkItemSigner.exe from https://github.com/autodesk-platform-services/aps-designautomation-signer/releases/ and provide the path to it in the root of the project"
-        );
-        process.exit(1);
-    }
-}
-
-const execAsync = (command) => {
-    return new Promise((resolve, reject) => {
-        exec(command, (error, stdout, stderr) => {
-            if (error) {
-                console.error(stdout);
-                console.error(stderr);
-                error.quit = true;
-                reject(error);
-                return;
-            }
-
-            resolve(stdout);
-        });
-    });
-};
-
 if (options.token) {
     console.log("Log in at http://localhost:8080");
 }
 
 if (options.key) {
-    await execAsync(`Das.WorkItemSigner.exe generate mykey.json`);
-
-    await execAsync(
-        `Das.WorkItemSigner.exe export mykey.json mypublickey.json`
-    );
+    const signer = Signer.create();
+    signer.save("mykey.json", false);
+    signer.save("mypublickey.json", true);
 
     console.log(
         "Generated public and private key files, mypublickey.json and mykey.json"
@@ -205,9 +171,8 @@ if (options.key) {
 
 if (options.sign) {
     const activityId = `${config.nickname}.${config.activity.id}+${config.activity.alias}`;
-    config.activity.signedId = await execAsync(
-        `Das.WorkItemSigner.exe sign mykey.json ${activityId}`
-    );
+    const signer = Signer.load("mykey.json");
+    config.activity.signedId = signer.sign(activityId);
     config.activity.signedId = config.activity.signedId.replace(
         /(\r\n|\n|\r)/gm,
         ""
