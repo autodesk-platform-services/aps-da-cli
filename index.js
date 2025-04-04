@@ -305,8 +305,15 @@ async function deleteApp() {
 
 async function patchApp() {
     const body = {
-        nickname: config.nickname,
-    };
+        nickname: config.nickname
+    }
+    
+    if (config.nickname === config.credentials.clientId) {
+        console.log(
+            "Nickname needs to be different from the client id, only then can the app be patched."
+        );
+        return;
+    }
 
     let publicKeyPath = "./mypublickey.json";
     if (fs.existsSync(publicKeyPath)) {
@@ -314,12 +321,16 @@ async function patchApp() {
             fs.readFileSync(publicKeyPath, "utf8")
         );
         body.publicKey = publicKeyContent;
-        console.log("Setting nickname and public key");
-    } else {
+    } 
+
+    if (body.publicKey) 
+        console.log(
+            "Setting both nickname and public key, since `mypublickey.json` is available in project root."
+        );
+    else 
         console.log(
             "Only setting nickname, since `mypublickey.json` is not found in project root."
         );
-    }
 
     try {
         let res = await fetch(
