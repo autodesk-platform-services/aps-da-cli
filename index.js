@@ -390,6 +390,11 @@ function createUpdateAppBundle() {
     console.log("Creating app bundle");
 
     return new Promise(async (resolve, reject) => {
+        if (!/^[a-z0-9_]*$/gm.test(config.appbundle.alias)) {
+            reject({ message: "config.appbundle.alias: Only alphanumeric characters and _ (underscore) are allowed.", quit: true });
+            return;
+        }
+
         let appBundle = await fetch(
             "https://developer.api.autodesk.com/da/us-east/v3/appbundles",
             {
@@ -491,6 +496,11 @@ function createUpdateActivity() {
     }
 
     return new Promise(async (resolve, reject) => {
+        if (!/^[a-z0-9_]*$/gm.test(config.activity.alias)) {
+            reject({ message: "config.activity.alias: Only alphanumeric characters and _ (underscore) are allowed.", quit: true });
+            return;
+        }
+
         let activity = await fetch(
             "https://developer.api.autodesk.com/da/us-east/v3/activities",
             {
