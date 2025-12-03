@@ -516,6 +516,7 @@ function createUpdateActivity() {
                     appbundles: appbundles,
                     commandLine: config.activity.commandLine,
                     parameters: config.activity.parameters,
+                    settings: config.activity.settings,
                 }),
             }
         );
@@ -539,6 +540,7 @@ function createUpdateActivity() {
                         appbundles: config.activity.appbundles,
                         commandLine: config.activity.commandLine,
                         parameters: config.activity.parameters,
+                        settings: config.activity.settings,
                     }),
                 }
             );
