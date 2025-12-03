@@ -716,13 +716,14 @@ function getSignedURL(bucketKey, objectName) {
 async function saveReport(workitemData) {
     console.log("Work item report: " + workitemData.reportUrl);
     try {
-        let res = await fetch(workitemData.reportUrl);
         let data = null;
         let extension = "json";
         try {
+            let res = await fetch(workitemData.reportUrl);
             data = await res.json();
             data = JSON.stringify(data, null, 2);
         } catch {
+            let res = await fetch(workitemData.reportUrl);
             data = await res.text();
             extension = "txt";
         }
