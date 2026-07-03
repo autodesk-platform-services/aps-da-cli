@@ -573,7 +573,7 @@ function createUpdateActivity() {
         if (alias.status === 409) {
             // If it already exists create new version instead
             alias = await fetch(
-                `https://developer.api.autodesk.com/da/us-east/v3/activities/${config.activity.id}/aliases/${config.appbundle.alias}`,
+                `https://developer.api.autodesk.com/da/us-east/v3/activities/${config.activity.id}/aliases/${config.activity.alias}`,
                 {
                     method: "PATCH",
                     headers: {
@@ -763,7 +763,7 @@ async function modifyWorkItemBody(items) {
 
         if (value?.url?.startsWith("urn:")) {
             const [bucketKey, objectName] = value.url.split(":")[3].split("/");
-            const signedUrl = await getSignedURL(bucketKey, objectName);
+            const signedUrl = await getSignedURL(bucketKey, encodeURI(objectName));
             value.url = signedUrl;
         }
     }
