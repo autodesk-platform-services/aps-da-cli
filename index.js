@@ -11,6 +11,8 @@ import Signer from "./signer.js";
 const app = express();
 app.use(express.json());
 
+const DA_API_URL = "https://developer.api.autodesk.com/da/us-east/v3";
+
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
@@ -253,7 +255,7 @@ async function listEngines() {
     let page = null;
     do {
         let res = await fetch(
-            `https://developer.api.autodesk.com/da/us-east/v3/engines${page ? `?page=${page}` : ""}`,
+            `${DA_API_URL}/engines${page ? `?page=${page}` : ""}`,
             {
                 method: "GET",
                 headers: {
@@ -279,7 +281,7 @@ async function listEngines() {
 async function deleteApp() {
     try {
         let res = await fetch(
-            "https://developer.api.autodesk.com/da/us-east/v3/forgeapps/me",
+            `${DA_API_URL}/forgeapps/me`,
             {
                 method: "DELETE",
                 headers: {
@@ -334,7 +336,7 @@ async function patchApp() {
 
     try {
         let res = await fetch(
-            "https://developer.api.autodesk.com/da/us-east/v3/forgeapps/me",
+            `${DA_API_URL}/forgeapps/me`,
             {
                 method: "PATCH",
                 headers: {
@@ -396,7 +398,7 @@ function createUpdateAppBundle() {
         }
 
         let appBundle = await fetch(
-            "https://developer.api.autodesk.com/da/us-east/v3/appbundles",
+            `${DA_API_URL}/appbundles`,
             {
                 method: "POST",
                 headers: {
@@ -417,7 +419,7 @@ function createUpdateAppBundle() {
         if (appBundle.status === 409) {
             // If it already exists create new version instead
             appBundle = await fetch(
-                `https://developer.api.autodesk.com/da/us-east/v3/appbundles/${config.appbundle.id}/versions`,
+                `${DA_API_URL}/appbundles/${config.appbundle.id}/versions`,
                 {
                     method: "POST",
                     headers: {
@@ -441,7 +443,7 @@ function createUpdateAppBundle() {
         await uploadAppBundle(appBundleData.uploadParameters);
 
         let alias = await fetch(
-            `https://developer.api.autodesk.com/da/us-east/v3/appbundles/${config.appbundle.id}/aliases`,
+            `${DA_API_URL}/appbundles/${config.appbundle.id}/aliases`,
             {
                 method: "POST",
                 headers: {
@@ -461,7 +463,7 @@ function createUpdateAppBundle() {
         if (alias.status === 409) {
             // If it already exists create new version instead
             alias = await fetch(
-                `https://developer.api.autodesk.com/da/us-east/v3/appbundles/${config.appbundle.id}/aliases/${config.appbundle.alias}`,
+                `${DA_API_URL}/appbundles/${config.appbundle.id}/aliases/${config.appbundle.alias}`,
                 {
                     method: "PATCH",
                     headers: {
@@ -502,7 +504,7 @@ function createUpdateActivity() {
         }
 
         let activity = await fetch(
-            "https://developer.api.autodesk.com/da/us-east/v3/activities",
+            `${DA_API_URL}/activities`,
             {
                 method: "POST",
                 headers: {
@@ -527,7 +529,7 @@ function createUpdateActivity() {
         if (activity.status === 409) {
             // If it already exists create new version instead
             activity = await fetch(
-                `https://developer.api.autodesk.com/da/us-east/v3/activities/${config.activity.id}/versions`,
+                `${DA_API_URL}/activities/${config.activity.id}/versions`,
                 {
                     method: "POST",
                     headers: {
@@ -553,7 +555,7 @@ function createUpdateActivity() {
             reject({ message: activity.message, quit: true });
 
         let alias = await fetch(
-            `https://developer.api.autodesk.com/da/us-east/v3/activities/${config.activity.id}/aliases`,
+            `${DA_API_URL}/activities/${config.activity.id}/aliases`,
             {
                 method: "POST",
                 headers: {
@@ -573,7 +575,7 @@ function createUpdateActivity() {
         if (alias.status === 409) {
             // If it already exists create new version instead
             alias = await fetch(
-                `https://developer.api.autodesk.com/da/us-east/v3/activities/${config.activity.id}/aliases/${config.activity.alias}`,
+                `${DA_API_URL}/activities/${config.activity.id}/aliases/${config.activity.alias}`,
                 {
                     method: "PATCH",
                     headers: {
@@ -637,7 +639,7 @@ function runWorkItem() {
         console.log(body);
 
         let workitem = await fetch(
-            "https://developer.api.autodesk.com/da/us-east/v3/workitems",
+            `${DA_API_URL}/workitems`,
             {
                 method: "POST",
                 headers: {
@@ -658,7 +660,7 @@ function runWorkItem() {
 
         while (true) {
             workitem = await fetch(
-                `https://developer.api.autodesk.com/da/us-east/v3/workitems/${workitemData.id}`,
+                `${DA_API_URL}/workitems/${workitemData.id}`,
                 {
                     method: "GET",
                     headers: {
