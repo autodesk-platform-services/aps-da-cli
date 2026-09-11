@@ -19,8 +19,10 @@ app.listen(PORT, () => {
 });
 
 app.get("/", async (req, res) => {
+    let scope = config.credentials.scope3LO || config.credentials.scope;
+    
     res.redirect(
-        `https://developer.api.autodesk.com/authentication/v2/authorize?response_type=code&client_id=${config.credentials.clientId}&redirect_uri=http://localhost:8080/callback&scope=${config.credentials.scope}`
+        `https://developer.api.autodesk.com/authentication/v2/authorize?response_type=code&client_id=${config.credentials.clientId}&redirect_uri=http://localhost:8080/callback&scope=${scope}`
     );
 });
 
@@ -627,6 +629,22 @@ function runWorkItem() {
             signatures = {
                 activityId: config.activity.signedId,
             };
+        } else if (config.workitem.arguments.adsk3LeggedToken) {
+            console.log(
+                "Using 3-legged access token because `adsk3LeggedToken` is set in work item arguments"
+            );
+            globals.accessToken3LO = null;
+            try {
+                globals.accessToken3LO = await getAccessToken3LO();
+                config.workitem.arguments.adsk3LeggedToken = globals.accessToken3LO;
+            } catch {
+                console.error("Could not fetch 3-legged access token");
+                reject({
+                    message: "Error getting 3-legged access token",
+                    quit: false,
+                });
+                return;
+            }
         }
 
         const items = await modifyWorkItemBody(config.workitem.arguments);
