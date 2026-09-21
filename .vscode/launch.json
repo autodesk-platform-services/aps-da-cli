@@ -10,7 +10,7 @@
             "name": "Get 3LO",
             "skipFiles": ["<node_internals>/**"],
             "program": "${workspaceFolder}/index.js",
-            "args": ["-t", "-c", "config.json"]
+            "args": ["-t", "-c", "${relativeFile}"]
         },
         {
             "type": "node",
@@ -18,7 +18,7 @@
             "name": "Engines",
             "skipFiles": ["<node_internals>/**"],
             "program": "${workspaceFolder}/index.js",
-            "args": ["-e", "-c", "config.json"]
+            "args": ["-e", "-c", "${relativeFile}"]
         },
         {
             "type": "node",
@@ -26,7 +26,7 @@
             "name": "App Bundle",
             "skipFiles": ["<node_internals>/**"],
             "program": "${workspaceFolder}/index.js",
-            "args": ["-b", "-c", "config.json"]
+            "args": ["-b", "-c", "${relativeFile}"]
         },
         {
             "type": "node",
@@ -34,7 +34,7 @@
             "name": "Activity",
             "skipFiles": ["<node_internals>/**"],
             "program": "${workspaceFolder}/index.js",
-            "args": ["-a", "-c", "config.json"]
+            "args": ["-a", "-c", "${relativeFile}"]
         },
         {
             "type": "node",
@@ -42,7 +42,7 @@
             "name": "App Bundle / Work Item",
             "skipFiles": ["<node_internals>/**"],
             "program": "${workspaceFolder}/index.js",
-            "args": ["-b", "-w", "-c", "config.json"]
+            "args": ["-b", "-w", "-c", "${relativeFile}"]
         },
         {
             "type": "node",
@@ -50,7 +50,7 @@
             "name": "Activity / Work Item",
             "skipFiles": ["<node_internals>/**"],
             "program": "${workspaceFolder}/index.js",
-            "args": ["-a", "-w", "-c", "config.json"]
+            "args": ["-a", "-w", "-c", "${relativeFile}"]
         },
         {
             "type": "node",
@@ -58,7 +58,7 @@
             "name": "Work Item",
             "skipFiles": ["<node_internals>/**"],
             "program": "${workspaceFolder}/index.js",
-            "args": ["-w", "-c", "config.json"]
+            "args": ["-w", "-c", "${relativeFile}"]
         },
         {
             "type": "node",
@@ -66,7 +66,7 @@
             "name": "Delete App",
             "skipFiles": ["<node_internals>/**"],
             "program": "${workspaceFolder}/index.js",
-            "args": ["-d", "-c", "config.json"]
+            "args": ["-d", "-c", "${relativeFile}"]
         },
         {
             "type": "node",
@@ -74,7 +74,7 @@
             "name": "Patch App",
             "skipFiles": ["<node_internals>/**"],
             "program": "${workspaceFolder}/index.js",
-            "args": ["-p", "-c", "config.json"]
+            "args": ["-p", "-c", "${relativeFile}"]
         },
         {
             "type": "node",
@@ -82,7 +82,7 @@
             "name": "Create Keys",
             "skipFiles": ["<node_internals>/**"],
             "program": "${workspaceFolder}/index.js",
-            "args": ["-k", "-c", "config.json"]
+            "args": ["-k", "-c", "${relativeFile}"]
         },
         {
             "type": "node",
@@ -90,7 +90,7 @@
             "name": "Sign Activity",
             "skipFiles": ["<node_internals>/**"],
             "program": "${workspaceFolder}/index.js",
-            "args": ["-s", "-c", "config.json"]
+            "args": ["-s", "-c", "${relativeFile}"]
         }
     ]
 }

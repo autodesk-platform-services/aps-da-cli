@@ -43,7 +43,7 @@ Before using the app follow these steps:
 ![app bundle location](./images/appbundle.png)
 - upload `inventor_sample_file.ipt` from [here](https://github.com/autodesk-platform-services/aps-design-automation-nodejs/tree/nodejs/sample%20files) to one of your OSS buckets that belong to the same `clientId` you provided for this project and update `bucketName` in `config.json` with the correct value.
 
-The `launch.json` file contains quite a few start options that can be used from **VS Code**'s **Run and Debug** palette  
+The `launch.json` file contains quite a few start options (**Get 3LO**, **Engines**, etc) that can be used from **VS Code**'s **Run and Debug** palette. Just make sure you select the specific config file (e.g. `config.json`) you want to use in the user interface before running any of those options.   
 
 ## License
 
